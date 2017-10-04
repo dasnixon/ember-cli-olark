@@ -7,13 +7,13 @@ export default Ember.Service.extend(Ember.Evented, {
 
 		const ENV = Ember.getOwner(this).factoryFor('config:environment');
 
-		if (ENV.OLARK && ENV.OLARK.skipInit) {
+		if (ENV.class.OLARK && ENV.class.OLARK.skipInit) {
 			this.olarkInitPromise = Ember.RSVP.Promise.resolve('skip init');
 			return this.olarkInitPromise;
 		}
 
 		var original = window.onloadstaticolarkcomjsclientappjs;
-		var initSettings = ENV.OLARK;
+		var initSettings = ENV.class.OLARK;
 		if (!initSettings || !initSettings.identity) {
 			return Ember.RSVP.reject('No settings for init');
 		}
